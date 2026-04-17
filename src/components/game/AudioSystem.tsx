@@ -26,6 +26,19 @@ export default function AudioSystem({ currentLevel }: { currentLevel: number }) 
   const humOscRef = useRef<OscillatorNode | null>(null);
   const humGainRef = useRef<GainNode | null>(null);
 
+  // Load initial state from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem('ahmed-universe-sound');
+    if (saved !== null) {
+      setIsEnabled(saved === 'true');
+    }
+  }, []);
+
+  // Save state to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('ahmed-universe-sound', isEnabled.toString());
+  }, [isEnabled]);
+
   // Auto-activate audio on first interaction (Browser requirement)
   useEffect(() => {
     const handleFirstInteraction = () => {
