@@ -1,0 +1,179 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 50%, #1a1040 0%, #0a0a12 60%);
+  scroll-snap-align: start;
+}
+
+.starfield {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 700px;
+  padding: 0 var(--space-6);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+  background: rgba(167, 139, 250, 0.1);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  color: var(--accent-primary);
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: var(--space-8);
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.title {
+  margin-bottom: var(--space-6);
+  line-height: 1.1;
+}
+
+.titleGame {
+  font-family: var(--font-game);
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: var(--space-2);
+  letter-spacing: 3px;
+}
+
+.titleUniverse {
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, #a78bfa, #6366f1, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+}
+
+.subtitle {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: var(--space-4);
+}
+
+.description {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  line-height: 1.8;
+  max-width: 500px;
+  margin: 0 auto var(--space-10);
+}
+
+/* Stats */
+.heroStats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  padding: var(--space-5) var(--space-8);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-2xl);
+}
+
+.heroStat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.heroStatValue {
+  font-family: var(--font-game);
+  font-size: 1.2rem;
+  color: var(--accent-primary);
+}
+
+.heroStatLabel {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.heroDivider {
+  width: 1px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Scroll indicator */
+.scrollIndicator {
+  position: absolute;
+  bottom: var(--space-10);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  z-index: 1;
+}
+
+.scrollText {
+  font-family: var(--font-game);
+  font-size: 0.55rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.scrollArrow {
+  font-size: var(--text-xl);
+  color: var(--accent-primary);
+}
+
+.gradientBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to top, var(--bg-primary), transparent);
+  z-index: 1;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .heroStats {
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .heroStatValue {
+    font-size: 1rem;
+  }
+
+  .badge {
+    font-size: 0.6rem;
+  }
+}

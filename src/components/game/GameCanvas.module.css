@@ -1,0 +1,99 @@
+.gameCanvas {
+  position: relative;
+  width: 100%;
+}
+
+.levelSection {
+  position: relative;
+  min-height: 100vh;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: var(--space-20) var(--space-6);
+  overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.levelBg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cardContainer {
+  position: relative;
+  z-index: var(--z-card);
+  width: 100%;
+  max-width: 850px;
+  margin-right: 2%;
+}
+
+.yearMarker {
+  position: absolute;
+  left: var(--space-8);
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-game);
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 900;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
+  letter-spacing: 4px;
+}
+
+/* Floating orbs */
+.floatingElements {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floatingOrb {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.3;
+  filter: blur(1px);
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: var(--space-12) var(--space-6);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.footerText {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.footerSub {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .levelSection {
+    justify-content: center;
+    padding: var(--space-16) var(--space-4);
+  }
+
+  .cardContainer {
+    margin-right: 0;
+    max-width: 100%;
+  }
+
+  .yearMarker {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(2rem, 15vw, 5rem);
+  }
+}

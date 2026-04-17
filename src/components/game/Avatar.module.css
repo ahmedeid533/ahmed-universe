@@ -1,0 +1,131 @@
+.avatarContainer {
+  position: fixed;
+  left: 8%;
+  bottom: 12%;
+  z-index: var(--z-avatar);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.glowRing {
+  position: absolute;
+  inset: -15px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--level-glow) 0%, transparent 70%);
+  opacity: 0.6;
+  animation: pulse-glow 3s ease-in-out infinite;
+  z-index: -1;
+}
+
+.avatarWrapper {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--level-primary);
+  box-shadow: 0 0 30px var(--level-glow), 0 0 60px var(--level-glow);
+  transition: border-color var(--transition-theme), box-shadow var(--transition-theme);
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.idle {
+  animation: float 3s ease-in-out infinite;
+}
+
+.walking {
+  animation: bounce 0.5s ease-in-out infinite;
+}
+
+.skinTag {
+  margin-top: var(--space-3);
+  padding: var(--space-1) var(--space-4);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--level-primary);
+  border-radius: var(--radius-full);
+  font-family: var(--font-game);
+  font-size: 0.55rem;
+  color: var(--level-primary);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.levelUpEffect {
+  position: absolute;
+  inset: -40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--level-primary) 0%, transparent 60%);
+  z-index: 10;
+}
+
+.levelUpText {
+  font-family: var(--font-game);
+  font-size: 0.8rem;
+  color: white;
+  text-shadow: 0 0 20px var(--level-primary), 0 0 40px var(--level-primary);
+  letter-spacing: 3px;
+}
+
+.particles {
+  position: absolute;
+  inset: -20px;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--level-particle);
+  border-radius: 50%;
+  bottom: 50%;
+  left: 50%;
+  opacity: 0;
+  animation: particleFloat 3s ease-out infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), var(--y));
+    opacity: 0;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .avatarContainer {
+    left: 50%;
+    bottom: 8%;
+    transform: translateX(-50%);
+  }
+
+  .avatarWrapper {
+    width: 100px;
+    height: 100px;
+  }
+
+  .skinTag {
+    font-size: 0.45rem;
+  }
+}

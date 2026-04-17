@@ -1,0 +1,117 @@
+.minimap {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--z-minimap);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding: var(--space-4) var(--space-2);
+}
+
+.trackLine {
+  position: absolute;
+  top: 20px;
+  bottom: 20px;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  z-index: -1;
+  overflow: hidden;
+}
+
+.trackProgress {
+  width: 100%;
+  background: linear-gradient(180deg, var(--level-primary), var(--level-secondary));
+  border-radius: var(--radius-full);
+  transition: background var(--transition-theme);
+}
+
+.node {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 20, 40, 0.8);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  z-index: 1;
+}
+
+.node:hover {
+  border-color: var(--level-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nodeIcon {
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.active {
+  border-color: var(--level-primary);
+  box-shadow: 0 0 15px var(--level-glow);
+}
+
+.completed {
+  border-color: var(--level-primary);
+  opacity: 0.7;
+}
+
+.activeRing {
+  position: absolute;
+  inset: -5px;
+  border: 2px solid var(--level-primary);
+  border-radius: 50%;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.levelName {
+  font-family: var(--font-game);
+  font-size: 0.5rem;
+  color: var(--level-primary);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .minimap {
+    right: 10px;
+  }
+
+  .node {
+    width: 28px;
+    height: 28px;
+  }
+
+  .nodeIcon {
+    font-size: 0.7rem;
+  }
+
+  .levelName {
+    display: none;
+  }
+
+  .track {
+    gap: 20px;
+  }
+}
