@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import type { Milestone } from '@/types';
 import styles from './MiniMap.module.css';
@@ -15,6 +15,15 @@ export default function MiniMap({
   isScrolling?: boolean;
 }) {
   const [hoveredNode, setHoveredNode] = useState<number | null>(null);
+  const [showActiveLabel, setShowActiveLabel] = useState(true);
+
+  useEffect(() => {
+    setShowActiveLabel(true);
+    const timer = setTimeout(() => {
+      setShowActiveLabel(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [currentLevel]);
 
   const scrollToLevel = (index: number) => {
     const element = document.getElementById(index === -1 ? 'hero' : `level-${index}`);
@@ -65,8 +74,8 @@ export default function MiniMap({
           <motion.span 
             className={styles.levelName}
             animate={{ 
-              opacity: (currentLevel === -1 || isScrolling || hoveredNode === -1) ? 1 : 0,
-              x: (currentLevel === -1 || isScrolling || hoveredNode === -1) ? 0 : -10,
+              opacity: (currentLevel === -1 && showActiveLabel) || hoveredNode === -1 ? 1 : 0,
+              x: (currentLevel === -1 && showActiveLabel) || hoveredNode === -1 ? 0 : -10,
             }}
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
@@ -104,8 +113,8 @@ export default function MiniMap({
                 color: currentLevel === i ? milestone.theme_color : 'white'
               }}
               animate={{ 
-                opacity: (currentLevel === i || isScrolling || hoveredNode === i) ? 1 : 0,
-                x: (currentLevel === i || isScrolling || hoveredNode === i) ? 0 : -10,
+                opacity: (currentLevel === i && showActiveLabel) || hoveredNode === i ? 1 : 0,
+                x: (currentLevel === i && showActiveLabel) || hoveredNode === i ? 0 : -10,
               }}
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
