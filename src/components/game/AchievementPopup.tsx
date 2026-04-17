@@ -14,7 +14,7 @@ export default function AchievementPopup({ levelIndex, levelTitle }: Achievement
   const [currentDisplay, setCurrentDisplay] = useState({ index: -1, title: '' });
 
   useEffect(() => {
-    if (levelIndex > currentDisplay.index && levelIndex >= 0) {
+    if (levelIndex >= currentDisplay.index && levelIndex >= -1) {
       setCurrentDisplay({ index: levelIndex, title: levelTitle });
       setVisible(true);
       const timer = setTimeout(() => setVisible(false), 4000);

@@ -26,7 +26,7 @@ const LEVEL_THEMES: LevelTheme[] = [
 export function useScrollProgress(): ScrollProgressState {
   const [state, setState] = useState<ScrollProgressState>({
     percentage: 0,
-    currentLevelIndex: 0,
+    currentLevelIndex: -1,
     currentTheme: 'dreamy',
     isScrolling: false,
     direction: 'idle',
