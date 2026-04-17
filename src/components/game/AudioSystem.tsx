@@ -20,11 +20,37 @@ const VolumeXIcon = () => (
 );
 
 export default function AudioSystem({ currentLevel }: { currentLevel: number }) {
-  const [isEnabled, setIsEnabled] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(true);
   const prevLevel = useRef(-1); // Start at -1 (Hero)
   const audioCtxRef = useRef<AudioContext | null>(null);
   const humOscRef = useRef<OscillatorNode | null>(null);
   const humGainRef = useRef<GainNode | null>(null);
+
+  // Auto-activate audio on first interaction (Browser requirement)
+  useEffect(() => {
+    const handleFirstInteraction = () => {
+      if (isEnabled) {
+        initCtx();
+        if (audioCtxRef.current?.state === 'suspended') {
+          audioCtxRef.current.resume();
+        }
+      }
+      // Remove listeners after first interaction
+      window.removeEventListener('click', handleFirstInteraction);
+      window.removeEventListener('touchstart', handleFirstInteraction);
+      window.removeEventListener('wheel', handleFirstInteraction);
+    };
+
+    window.addEventListener('click', handleFirstInteraction, { passive: true });
+    window.addEventListener('touchstart', handleFirstInteraction, { passive: true });
+    window.addEventListener('wheel', handleFirstInteraction, { passive: true });
+
+    return () => {
+      window.removeEventListener('click', handleFirstInteraction);
+      window.removeEventListener('touchstart', handleFirstInteraction);
+      window.removeEventListener('wheel', handleFirstInteraction);
+    };
+  }, [isEnabled]);
 
   // Background Space Hum
   useEffect(() => {
