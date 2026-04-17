@@ -70,12 +70,12 @@ export default function MiniMap({
             />
           )}
 
-          {/* Home Label on Right */}
+          {/* Home Label on Left */}
           <motion.span 
             className={styles.levelName}
             animate={{ 
               opacity: (currentLevel === -1 && showActiveLabel) || hoveredNode === -1 ? 1 : 0,
-              x: (currentLevel === -1 && showActiveLabel) || hoveredNode === -1 ? 0 : -10,
+              x: (currentLevel === -1 && showActiveLabel) || hoveredNode === -1 ? 0 : 10,
             }}
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
@@ -106,7 +106,7 @@ export default function MiniMap({
               />
             )}
 
-            {/* Label positioned to the right of the node */}
+            {/* Label positioned to the left of the node */}
             <motion.span 
               className={styles.levelName}
               style={{
@@ -114,7 +114,7 @@ export default function MiniMap({
               }}
               animate={{ 
                 opacity: (currentLevel === i && showActiveLabel) || hoveredNode === i ? 1 : 0,
-                x: (currentLevel === i && showActiveLabel) || hoveredNode === i ? 0 : -10,
+                x: (currentLevel === i && showActiveLabel) || hoveredNode === i ? 0 : 10,
               }}
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
