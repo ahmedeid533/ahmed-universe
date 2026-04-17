@@ -1,10 +1,21 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { Milestone } from '@/types';
 import styles from './MiniMap.module.css';
 
-export default function MiniMap({ milestones, currentLevel }: { milestones: Milestone[], currentLevel: number }) {
+export default function MiniMap({ 
+  milestones, 
+  currentLevel, 
+  isScrolling,
+}: { 
+  milestones: Milestone[], 
+  currentLevel: number,
+  isScrolling?: boolean;
+}) {
+  const [hoveredNode, setHoveredNode] = useState<number | null>(null);
+
   const scrollToLevel = (index: number) => {
     const element = document.getElementById(index === -1 ? 'hero' : `level-${index}`);
     if (element) {
@@ -36,6 +47,8 @@ export default function MiniMap({ milestones, currentLevel }: { milestones: Mile
         {/* Home/Hero Node */}
         <div 
           onClick={() => scrollToLevel(-1)}
+          onMouseEnter={() => setHoveredNode(-1)}
+          onMouseLeave={() => setHoveredNode(null)}
           className={`${styles.node} ${currentLevel === -1 ? styles.active : ''}`}
           title="Home"
         >
@@ -47,6 +60,18 @@ export default function MiniMap({ milestones, currentLevel }: { milestones: Mile
               initial={false}
             />
           )}
+
+          {/* Home Label on Right */}
+          <motion.span 
+            className={styles.levelName}
+            animate={{ 
+              opacity: (currentLevel === -1 || isScrolling || hoveredNode === -1) ? 1 : 0,
+              x: (currentLevel === -1 || isScrolling || hoveredNode === -1) ? 0 : -10,
+            }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          >
+            Home
+          </motion.span>
         </div>
 
         {/* Milestone Nodes */}
@@ -54,8 +79,9 @@ export default function MiniMap({ milestones, currentLevel }: { milestones: Mile
           <div
             key={milestone.id}
             onClick={() => scrollToLevel(i)}
+            onMouseEnter={() => setHoveredNode(i)}
+            onMouseLeave={() => setHoveredNode(null)}
             className={`${styles.node} ${currentLevel === i ? styles.active : ''} ${currentLevel > i ? styles.completed : ''}`}
-            title={milestone.title}
             style={{ 
               borderColor: currentLevel === i ? milestone.theme_color : 'rgba(255, 255, 255, 0.1)',
               boxShadow: currentLevel === i ? `0 0 15px ${milestone.theme_color}60` : 'none'
@@ -71,24 +97,17 @@ export default function MiniMap({ milestones, currentLevel }: { milestones: Mile
               />
             )}
 
-            {/* Label positioned to the left of the node */}
+            {/* Label positioned to the right of the node */}
             <motion.span 
               className={styles.levelName}
               style={{
-                position: 'absolute',
-                right: '100%',
-                marginRight: '15px',
-                whiteSpace: 'nowrap',
-                pointerEvents: 'none',
-                writingMode: 'horizontal-tb', // Changed to horizontal for better readability
-                fontSize: '0.65rem',
-                textAlign: 'right'
-              }}
-              animate={{ 
-                opacity: currentLevel === i ? 1 : 0,
-                x: currentLevel === i ? 0 : 10,
                 color: currentLevel === i ? milestone.theme_color : 'white'
               }}
+              animate={{ 
+                opacity: (currentLevel === i || isScrolling || hoveredNode === i) ? 1 : 0,
+                x: (currentLevel === i || isScrolling || hoveredNode === i) ? 0 : -10,
+              }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
             >
               {milestone.title}
             </motion.span>

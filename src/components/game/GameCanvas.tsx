@@ -32,7 +32,7 @@ export default function GameCanvas() {
       <AudioSystem currentLevel={currentLevelIndex} />
 
       {/* Mini Map */}
-      <MiniMap currentLevel={currentLevelIndex} milestones={milestones} />
+      <MiniMap currentLevel={currentLevelIndex} milestones={milestones} isScrolling={isScrolling} />
 
       {/* Fixed Avatar */}
       <Avatar

@@ -1,6 +1,6 @@
 .minimap {
   position: fixed;
-  right: 24px;
+  right: 180px;
   top: 50%;
   transform: translateY(-50%);
   z-index: var(--z-minimap);
@@ -83,14 +83,17 @@
 }
 
 .levelName {
+  position: absolute;
+  left: 100%;
+  margin-left: 20px;
   font-family: var(--font-game);
-  font-size: 0.5rem;
+  font-size: 0.65rem;
   color: var(--level-primary);
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
+  white-space: nowrap;
+  pointer-events: none;
   letter-spacing: 2px;
   text-transform: uppercase;
-  opacity: 0.7;
+  text-align: left;
 }
 
 @media (max-width: 768px) {
